@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cluster name="test-primary-cluster" description="test-primary-cluster" colo="TEST DEV PRIMARY CLUSTER" xmlns="uri:falcon:cluster:0.1">
+    <interfaces>
+        <interface type="readonly" endpoint="hftp://localhost:50070" version="2.2.0"/>
+        <interface type="write" endpoint="hdfs://localhost:8020" version="2.2.0"/>
+        <interface type="execute" endpoint="localhost:8050" version="2.2.0"/>
+        <interface type="workflow" endpoint="http://localhost:11000/oozie/" version="4.0.0"/>
+        <interface type="messaging" endpoint="tcp://localhost:61616?daemon=true" version="5.1.6"/>
+    </interfaces>
+    <locations>
+        <location name="staging" path="/apps/falcon/test-primary-cluster/staging"/>
+        <location name="temp" path="/tmp"/>
+        <location name="working" path="/apps/falcon/test-primary-cluster/working"/>
+    </locations>
+    <ACL owner="rishav" group="hdpuser" permission="0770"/>
+</cluster>

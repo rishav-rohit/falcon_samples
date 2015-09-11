@@ -1,0 +1,19 @@
+<workflow-app name="${workflowName}" xmlns="uri:oozie:workflow:0.1">
+ <start to="demo_script"/>
+ 
+ <action name="demo_script">
+	<ssh xmlns="uri:oozie:ssh-action:0.1">
+	  <host>rishav@poc001</host>
+	  <command>~/demo.bash</command>
+	  <args>${input1}</args>
+	  <args>${input2}</args>
+      <capture-output/>
+	</ssh>
+   <ok to="end"/>
+   <error to="kill"/>
+ </action>
+ <kill name="kill">
+   <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+ </kill>
+ <end name="end"/>
+</workflow-app>

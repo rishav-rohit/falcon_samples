@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<process name="process-01"
+	xmlns="uri:falcon:process:0.1">
+	<clusters>
+		<cluster name="test-primary-cluster">
+			<validity start="2015-09-08T15:00Z" end="2099-03-10T23:00Z" />
+		</cluster>
+	</clusters>
+	<parallel>1</parallel>
+	<order>FIFO</order>
+	<frequency>days(1)</frequency>
+	<timezone>UTC</timezone>
+	<inputs>
+		<input name="feed-01-trigger"
+			end="today(1,0)" start="today(0,0)"
+			feed="feed-01-trigger" />
+	</inputs>
+	<properties>
+		<property name="workflowName" value="workflow-01" />
+		<property name="input1" value="variable1" />
+		<property name="input2" value="${formatTime(dateOffset(instanceTime(), -1, 'DAY'),'yyyy-MM-dd')}" />
+	</properties>
+	<workflow name="workflow-01"
+		version="2.0.0" engine="oozie"
+		path="/tmp/oozie_workflow" />
+	<retry policy="periodic" delay="minutes(15)" attempts="2" />
+    <ACL owner="rishav" group="hdpuser" permission="0770"/>
+</process>

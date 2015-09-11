@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed description="feed-01-trigger"
+	name="feed-01-trigger" xmlns="uri:falcon:feed:0.1">
+	<frequency>days(1)</frequency>
+	<late-arrival cut-off="hours(20)" />
+	<clusters>
+		<cluster name="test-primary-cluster" type="source">
+			<validity start="2015-09-07T14:00Z" end="2099-03-09T12:00Z" />
+			<retention limit="months(9999)" action="archive" />
+			<locations>
+				<location type="data" path="/tmp/feed-01/${YEAR}-${MONTH}-${DAY}" />
+			</locations>
+		</cluster>
+	</clusters>
+
+	<locations>
+		<location type="data" path="/tmp/feed-01/${YEAR}-${MONTH}-${DAY}" />
+		<location type="stats" path="/none" />
+		<location type="meta" path="/none" />
+	</locations>
+
+    <ACL owner="rishav" group="hdpuser" permission="0770"/>
+	<schema location="/none" provider="none" />
+</feed>
