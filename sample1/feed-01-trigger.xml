@@ -7,9 +7,6 @@
 		<cluster name="test-primary-cluster" type="source">
 			<validity start="2015-09-07T14:00Z" end="2099-03-09T12:00Z" />
 			<retention limit="months(9999)" action="archive" />
-			<locations>
-				<location type="data" path="/tmp/feed-01/${YEAR}-${MONTH}-${DAY}" />
-			</locations>
 		</cluster>
 	</clusters>
 
