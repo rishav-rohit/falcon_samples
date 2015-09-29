@@ -1,0 +1,25 @@
+<process name="multi-table-process" xmlns="uri:falcon:process:0.1">
+    <clusters>
+        <cluster name="test-primary-cluster">
+            <validity start="2015-09-26T15:00Z" end="2099-03-09T12:00Z" />
+        </cluster>
+    </clusters>
+
+    <parallel>1</parallel>
+    <order>FIFO</order>
+    <frequency>days(1)</frequency>
+    <timezone>UTC</timezone>
+
+    <inputs>
+        <input end="today(0,0)" start="today(0,0)" feed="input-table-1" name="input1"/>
+        <input end="today(0,0)" start="today(0,0)" feed="input-table-2" name="input2"/>
+    </inputs>
+
+    <outputs>
+        <output instance="today(0,0)" feed="rec-count-tbl" name="output"/>
+    </outputs>
+
+    <workflow engine="hive" path="/tmp/rishav/cnt_script.hql"/>
+
+    <retry policy="periodic" delay="minutes(10)" attempts="3"/>
+</process>

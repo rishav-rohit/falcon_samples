@@ -1,0 +1,16 @@
+<feed description="output table for storing record count" name="rec-count-tbl" xmlns="uri:falcon:feed:0.1">
+    <frequency>days(1)</frequency>
+    <timezone>UTC</timezone>
+
+    <clusters>
+        <cluster name="test-primary-cluster" type="source">
+			<validity start="2015-09-20T14:00Z" end="2099-03-09T12:00Z" />
+			<retention limit="months(9999)" action="archive" />
+        </cluster>
+    </clusters>
+
+    <table uri="catalog:tmp_rishav:rec_count_tbl#feed_date=${YEAR}-${MONTH}-${DAY}" />
+
+    <ACL owner="rishav" group="hdpuser" permission="0770"/>
+    <schema location="hcat" provider="hcat"/>
+</feed>
